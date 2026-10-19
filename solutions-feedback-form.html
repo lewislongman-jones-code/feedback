@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solutions team feedback (anonymous)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --ink: #17202c;
+    --muted: #596577;
+    --line: #d9dee6;
+    --accent: #1b6b88;
+    --accent-ink: #ffffff;
+    --accent-soft: #e3f0f5;
+    --warn: #a3361f;
+    --ok: #1f7a4d;
+    --radius: 10px;
+    --head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #11161d;
+      --surface: #1a212b;
+      --ink: #eef1f5;
+      --muted: #a2adbd;
+      --line: #2e3846;
+      --accent: #5db4d3;
+      --accent-ink: #0c1a22;
+      --accent-soft: #1c3440;
+      --warn: #ff9b86;
+      --ok: #6fd3a0;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 16px/1.55 var(--body);
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+  h1, h2 { font-family: var(--head); letter-spacing: -0.01em; margin: 0; }
+  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.1; font-weight: 700; }
+  h2 { font-size: 22px; font-weight: 700; line-height: 1.2; }
+  .lede { max-width: 62ch; color: var(--muted); margin: 14px 0 0; }
+  .privacy {
+    margin-top: 22px; padding: 14px 16px; max-width: 62ch;
+    background: var(--accent-soft); border-radius: var(--radius);
+    font-size: 15px;
+  }
+  .privacy strong { font-weight: 600; }
+
+  section.card {
+    margin-top: 28px; padding: 28px 24px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  }
+  section.card > p.sub { color: var(--muted); margin: 6px 0 22px; max-width: 62ch; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend { font-weight: 600; padding: 0; margin-bottom: 12px; }
+  label.field { display: block; font-weight: 600; margin-bottom: 6px; }
+  select, textarea {
+    width: 100%; font: inherit; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px 12px;
+  }
+  select { max-width: 260px; }
+  textarea { min-height: 96px; resize: vertical; }
+  .opt { font-weight: 400; color: var(--muted); }
+  .row { margin-top: 24px; }
+
+  /* The 1–5 scale rises like steps: the one memorable element */
+  .steps {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+    align-items: end; margin: 0; padding: 0; list-style: none;
+  }
+  .step { position: relative; display: flex; }
+  .step input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .step label {
+    flex: 1; display: flex; flex-direction: column; gap: 6px;
+    padding: 14px 12px; border: 1.5px solid var(--line); border-radius: var(--radius);
+    background: var(--bg); cursor: pointer;
+    transition: border-color .15s, background-color .15s;
+  }
+  .step:nth-child(1) label { min-height: 150px; }
+  .step:nth-child(2) label { min-height: 174px; }
+  .step:nth-child(3) label { min-height: 198px; }
+  .step:nth-child(4) label { min-height: 222px; }
+  .step:nth-child(5) label { min-height: 246px; }
+  .step .n { font: 700 28px/1 var(--head); color: var(--accent); }
+  .step .t { font-weight: 600; line-height: 1.25; }
+  .step .d { font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+  .step input:hover + label { border-color: var(--accent); }
+  .step input:checked + label { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+  .step input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .yn { display: flex; gap: 12px; flex-wrap: wrap; }
+  .yn .step { flex: 0 0 auto; }
+  .yn .step label { min-height: 0; flex-direction: row; align-items: center; padding: 12px 28px; font-weight: 600; font-size: 17px; }
+
+  .actions { margin-top: 32px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  button.primary {
+    font: 600 16px var(--body); color: var(--accent-ink); background: var(--accent);
+    border: 0; border-radius: 8px; padding: 13px 26px; cursor: pointer;
+  }
+  button.primary:disabled { opacity: .55; cursor: default; }
+  button.primary:focus-visible, button.link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  button.link { font: inherit; background: none; border: 0; color: var(--accent); text-decoration: underline; cursor: pointer; padding: 0; }
+  .msg { margin: 0; font-size: 15px; }
+  .msg.err { color: var(--warn); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .done { margin-top: 28px; padding: 32px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .done h2 { color: var(--ok); }
+  [hidden] { display: none !important; }
+
+  @media (max-width: 720px) {
+    .steps { grid-template-columns: 1fr; }
+    .step:nth-child(n) label { min-height: 0; }
+    .step label { flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 12px; }
+    .step .d { flex-basis: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .step label { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>How is the Solutions team working with you?</h1>
+    <p class="lede">Your feedback helps presales and solutions improve how we work alongside sales. It takes about a minute.</p>
+    <p class="privacy"><strong>This form is anonymous.</strong> It doesn’t ask who you are, and only the date, quarter and your answers are saved. Please keep names of people, customers or deals out of the comment boxes.</p>
+  </header>
+
+  <form id="feedback" novalidate>
+    <!-- Honeypot: real people never see or fill this -->
+    <div class="hp" aria-hidden="true">
+      <label>Leave this empty <input type="text" name="website" id="website" tabindex="-1" autocomplete="off"></label>
+    </div>
+
+    <section class="card" id="sec-partnership">
+      <h2>Sales Partnership Score</h2>
+      <p class="sub">Thinking about this quarter, how well did presales and solutions work with sales as one team?</p>
+
+      <div>
+        <label class="field" for="quarter">Quarter</label>
+        <select id="quarter" name="quarter"></select>
+      </div>
+
+      <fieldset class="row">
+        <legend>Pick the description that fits best</legend>
+        <ul class="steps" id="scale"></ul>
+      </fieldset>
+
+      <div class="row">
+        <label class="field" for="c-partnership">Anything you’d like to add? <span class="opt">(optional)</span></label>
+        <textarea id="c-partnership" maxlength="2000" placeholder="What worked well, or what would make the biggest difference next quarter?"></textarea>
+      </div>
+    </section>
+
+    <section class="card" id="sec-pulse">
+      <h2>Customer Perception Pulse</h2>
+      <p class="sub">Answer after a customer or prospect meeting where presales or solutions took part.</p>
+
+      <fieldset>
+        <legend>Did presales/solutions help clarify value?</legend>
+        <div class="yn">
+          <div class="step"><input type="radio" name="pulse" id="pulse-yes" value="Yes"><label for="pulse-yes">Yes</label></div>
+          <div class="step"><input type="radio" name="pulse" id="pulse-no" value="No"><label for="pulse-no">No</label></div>
+        </div>
+      </fieldset>
+
+      <div class="row">
+        <label class="field" for="c-pulse">What made the difference? <span class="opt">(optional)</span></label>
+        <textarea id="c-pulse" maxlength="2000"></textarea>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button type="submit" class="primary" id="send">Send feedback</button>
+      <p class="msg" id="status" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+
+  <div class="done" id="done" hidden tabindex="-1">
+    <h2>Thank you, your feedback has been sent</h2>
+    <p>Nothing in it can be traced back to you.</p>
+    <p><button type="button" class="link" id="again">Send another response</button></p>
+  </div>
+</main>
+
+<script>
+/* ---------- Configuration ---------- */
+// Paste the Web app URL from your Apps Script deployment (ends in /exec)
+const ENDPOINT = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+const SCALE = [
+  { n: 1, t: 'Needs Improvement', d: 'Response is slow or unclear, making it harder to move forward.' },
+  { n: 2, t: 'Inconsistent',      d: 'Sometimes helpful, but not always reliable or easy to align with.' },
+  { n: 3, t: 'Reliable',          d: 'Generally dependable and meets most needs, though not always ahead of the curve.' },
+  { n: 4, t: 'Trusted Partner',   d: 'Consistent, collaborative, and well aligned with the team’s goals.' },
+  { n: 5, t: 'Strategic Partner', d: 'Anticipates needs, accelerates progress, and feels like a true co-owner of success.' }
+];
+
+/* ---------- Setup ---------- */
+const $ = (id) => document.getElementById(id);
+const form = $('feedback');
+
+// ?form=partnership shows only the quarterly score; ?form=pulse only the post-meeting question
+const mode = new URLSearchParams(location.search).get('form');
+if (mode === 'partnership') $('sec-pulse').hidden = true;
+if (mode === 'pulse') $('sec-partnership').hidden = true;
+
+// Scale tiles
+$('scale').innerHTML = SCALE.map((s) =>
+  '<li class="step">' +
+    '<input type="radio" name="score" id="score-' + s.n + '" value="' + s.n + '">' +
+    '<label for="score-' + s.n + '"><span class="n">' + s.n + '</span>' +
+    '<span class="t">' + s.t + '</span><span class="d">' + s.d + '</span></label>' +
+  '</li>'
+).join('');
+
+// Quarter selector: current quarter, previous quarter
+(function buildQuarters() {
+  const now = new Date();
+  let q = Math.floor(now.getMonth() / 3) + 1;
+  let y = now.getFullYear();
+  const opts = [];
+  for (let i = 0; i < 2; i++) {
+    opts.push('Q' + q + ' ' + y);
+    q -= 1;
+    if (q === 0) { q = 4; y -= 1; }
+  }
+  $('quarter').innerHTML = opts.map((o) => '<option>' + o + '</option>').join('');
+})();
+
+/* ---------- Submit ---------- */
+function setStatus(text, isError) {
+  const el = $('status');
+  el.textContent = text;
+  el.className = 'msg' + (isError ? ' err' : '');
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  setStatus('', false);
+
+  const payload = { quarter: $('quarter').value, website: $('website').value };
+  const showP = !$('sec-partnership').hidden;
+  const showU = !$('sec-pulse').hidden;
+
+  const score = form.querySelector('input[name="score"]:checked');
+  const pulse = form.querySelector('input[name="pulse"]:checked');
+
+  if (showP && score) {
+    payload.partnership = { score: Number(score.value), comment: $('c-partnership').value.trim() };
+  }
+  if (showU && pulse) {
+    payload.pulse = { clarified: pulse.value, comment: $('c-pulse').value.trim() };
+  }
+  if (!payload.partnership && !payload.pulse) {
+    setStatus('Choose a score or answer Yes/No before sending.', true);
+    return;
+  }
+  if (ENDPOINT.indexOf('PASTE_') === 0) {
+    setStatus('This form isn’t connected to a Google Sheet yet. Add the Apps Script URL to ENDPOINT.', true);
+    return;
+  }
+
+  const btn = $('send');
+  btn.disabled = true;
+  setStatus('Sending…', false);
+  try {
+    // text/plain avoids a CORS preflight, which Apps Script can’t answer
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    const out = await res.json();
+    if (!out.ok) throw new Error(out.error || 'Save failed');
+    form.hidden = true;
+    $('done').hidden = false;
+    $('done').focus();
+  } catch (err) {
+    setStatus('Your feedback wasn’t saved. Check your connection and try again.', true);
+    btn.disabled = false;
+  }
+});
+
+$('again').addEventListener('click', () => {
+  form.reset();
+  form.hidden = false;
+  $('done').hidden = true;
+  $('send').disabled = false;
+  setStatus('', false);
+});
+</script>
+</body>
+</html>
