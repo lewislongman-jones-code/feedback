@@ -4,37 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Solutions team feedback (anonymous)</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f6f8;
+    /* Intent HQ palette: deep green, olive, sage, mint */
+    --bg: #f2f6f1;
     --surface: #ffffff;
-    --ink: #17202c;
-    --muted: #596577;
-    --line: #d9dee6;
-    --accent: #1b6b88;
+    --ink: #16241b;
+    --muted: #53635a;
+    --line: #d2dbd0;
+    --accent: #5b6b4f;
     --accent-ink: #ffffff;
-    --accent-soft: #e3f0f5;
+    --accent-soft: #d9e2cf;
     --warn: #a3361f;
-    --ok: #1f7a4d;
+    --ok: #2f6b3e;
+    --up: #2f6b3e;
+    --down: #a3361f;
+    --bar: #16241b;
+    --bar-ink: #eaf3ee;
     --radius: 10px;
-    --head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-    --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+    --head: Arial, Helvetica, "Segoe UI", sans-serif;
+    --body: Arial, Helvetica, "Segoe UI", sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #11161d;
-      --surface: #1a212b;
-      --ink: #eef1f5;
-      --muted: #a2adbd;
-      --line: #2e3846;
-      --accent: #5db4d3;
-      --accent-ink: #0c1a22;
-      --accent-soft: #1c3440;
+      --bg: #0f1812;
+      --surface: #16241b;
+      --ink: #eaf3ee;
+      --muted: #a9b8ac;
+      --line: #2b3d31;
+      --accent: #b9cda3;
+      --accent-ink: #16241b;
+      --accent-soft: #223629;
       --warn: #ff9b86;
-      --ok: #6fd3a0;
+      --ok: #8fd3a8;
+      --up: #8fd3a8;
+      --down: #ff9b86;
+      --bar: #0b120d;
+      --bar-ink: #eaf3ee;
     }
   }
   * { box-sizing: border-box; }
@@ -126,9 +132,17 @@
     .step .d { flex-basis: 100%; }
   }
   @media (prefers-reduced-motion: reduce) { .step label { transition: none; } }
+
+  /* Intent HQ top bar */
+  .brandbar { background: var(--bar); color: var(--bar-ink); }
+  .brandbar div { max-width: 980px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: baseline; gap: 14px; }
+  .brandbar div { max-width: 860px; }
+  .brandbar .mark { font: 700 19px/1 var(--head); }
+  .brandbar .where { font-size: 14px; opacity: .8; }
 </style>
 </head>
 <body>
+<div class="brandbar"><div><span class="mark">Intent HQ</span><span class="where">Solutions team</span></div></div>
 <main>
   <header>
     <h1>How is the Solutions team working with you?</h1>
@@ -196,7 +210,7 @@
 <script>
 /* ---------- Configuration ---------- */
 // Paste the Web app URL from your Apps Script deployment (ends in /exec)
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxwokvu11wYz8Zj5VTglrBEzdsSSYZaI8PqPYBdmS-B--8AHE2H--0i-7oKRVLCtTL8JQ/exec';
+const ENDPOINT = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
 const SCALE = [
   { n: 1, t: 'Needs Improvement', d: 'Response is slow or unclear, making it harder to move forward.' },
